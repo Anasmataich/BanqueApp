@@ -40,6 +40,8 @@ class Compte:
         self.balance -= amount
         # إضافة معاملة جديدة من نوع سحب
         return self.add_transaction("Retrait", amount)
+    def virement(self ,compte_source ,compte_dest , montant):
+        pass
         
     def __str__(self):
         return f"Compte {self.id} | Solde: {self.balance:.2f} MAD"
