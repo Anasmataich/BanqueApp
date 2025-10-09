@@ -3,6 +3,7 @@ import uuid
 from .transaction import Transaction # استيراد الكلاس الجديد
 
 class Compte:
+    #modi_fief
     def __init__(self, balance=0, id=None):
         self.id = id or str(uuid.uuid4())
         self.balance = balance
