@@ -5,7 +5,7 @@ from .compte import Compte
 class Banque:
     def __init__(self, nom):
         self.nom = nom
-        self.clients = {} # استخدام dictionary أفضل للبحث السريع بالـ ID
+        self.clients = {} 
         self.comptes = {}
 
     def create_client(self, nom, prenom):
@@ -33,12 +33,12 @@ class Banque:
         return account
 
     def deposit(self, account_id, amount):
-        # البحث عن الحساب ثم استدعاء دالة الإيداع الخاصة به
+
         acc = self.find_account(account_id)
         return acc.deposit(amount)
 
     def withdraw(self, account_id, amount):
-        # البحث عن الحساب ثم استدعاء دالة السحب الخاصة به
+
         acc = self.find_account(account_id)
         return acc.withdraw(amount)
 
@@ -48,27 +48,24 @@ class Banque:
             
         acc_from = self.find_account(from_id)
         acc_to = self.find_account(to_id)
-
-        # التحقق من الرصيد قبل أي عملية
+        
         if amount > acc_from.get_balance():
             raise ValueError("Solde insuffisant pour le virement")
-
-        # تتم العملية هنا لأنها تخص حسابين
+        
         acc_from.balance -= amount
         acc_to.balance += amount
-        
-        # تسجيل معاملتين، واحدة لكل حساب
+
         t1 = acc_from.add_transaction("Virement sortant", amount, account_to=to_id)
         t2 = acc_to.add_transaction("Virement entrant", amount, account_from=from_id)
         return (t1, t2)
 
     def account_history(self, account_id):
-        # الآن هذه الدالة تعمل بشكل صحيح لأن acc.transactions موجود
+
         acc = self.find_account(account_id)
         return acc.transactions
         
     def add_interest(self, account_id, rate_percentage):
-        # ✨ Partie 8: Implémentation de la fonctionnalité d'intérêts
+        
         acc = self.find_account(account_id)
         interest = acc.get_balance() * (rate_percentage / 100.0)
         acc.balance += interest

@@ -64,11 +64,10 @@ def main():
                     print("Aucune transaction")
                 else:
                     for tr in hist:
-                        # الآن tr هو كائن وليس قاموس
-                        print(tr) # سيتم استدعاء دالة __str__ تلقائياً
+                        print(tr) 
                 print("---------------------------------")
             
-            elif choice == "8": # ✨ Nouveau
+            elif choice == "8": 
                 aid = input("ID compte: ").strip()
                 rate = float(input("Taux d'intérêt en % (ex: 2.5): ") or 2.5)
                 t = bank.add_interest(aid, rate)

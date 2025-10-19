@@ -18,7 +18,7 @@ class Transaction:
         self.account_to = account_to
 
     def __str__(self):
-        # تمثيل المعاملة كنص لسهولة الطباعة
+
         date_str = self.date.strftime("%Y-%m-%d %H:%M:%S")
         details = f"{date_str} | {self.ttype:<18} | {self.amount:>8.2f} MAD"
         if self.account_from:
