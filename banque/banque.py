@@ -7,7 +7,7 @@ class Banque:
         self.nom = nom
         self.clients = {} 
         self.comptes = {}
-        self.info={}
+        self.infp={}
 # hdvkbkjbkjbfjbjjfjn
     def create_client(self, nom, prenom):
         c = Client(nom, prenom)

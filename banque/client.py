@@ -11,6 +11,7 @@ class Client:
         self.nom = nom
         self.prenom = prenom
         self.comptes = []  
+        self.an={}
 
     def ajouter_compte(self, compte):
         self.comptes.append(compte)
