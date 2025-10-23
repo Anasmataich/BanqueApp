@@ -12,11 +12,21 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Lancement des tests unitaires avec Pytest...'
                 bat '''
+                echo "Creation de l'environnement virtuel..."
+                python -m venv venv
+
+                echo "Activation de l'environnement..."
+                call .\\venv\\Scripts\\activate.bat
+                
+                echo "Installation de pytest..."
+                pip install pytest
+                
+                REM Si vous avez un fichier requirements.txt, utilisez-le :
+                REM pip install -r requirements.txt
+
+                echo "Lancement des tests unitaires avec Pytest..."
                 pytest -v > test_results.txt
-                type test_results.txt
-                pytest -v
                 '''
             }
         }
