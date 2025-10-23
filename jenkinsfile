@@ -13,10 +13,15 @@ pipeline {
         }
         stage('run the app') {
             steps {
-                bat """
-                python main.py
-                """
+                bat 'python main.py --auto'
             }
         }
+
+        stage('Run Tests') {
+            steps {
+                bat 'pytest -v'
+            }
+        }
+
     }
  }

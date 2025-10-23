@@ -1,4 +1,4 @@
-# main.py
+import sys
 from banque.banque import Banque
 
 def print_menu():
@@ -10,8 +10,42 @@ def print_menu():
     print("5. Virement")
     print("6. Consulter solde")
     print("7. Historique des transactions")
-    print("8. Ajouter des intérêts (feature)") # ✨ Nouveau
-    print("9. Quitter") # ✨ Changé
+    print("8. Ajouter des intérêts (feature)")
+    print("9. Quitter")
+
+def mode_automatique():
+    print("🚀 Mode automatique Jenkins lancé...\n")
+    bank = Banque("Banque Centrale")
+
+    # 1️⃣ Création de deux clients
+    c1 = bank.create_client("Ali", "Auto")
+    c2 = bank.create_client("Sara", "Auto")
+    print(f"✅ Clients créés: {c1.prenom} {c1.nom} / {c2.prenom} {c2.nom}")
+
+    # 2️⃣ Création de comptes
+    a1 = bank.create_account(c1.id, 1000)
+    a2 = bank.create_account(c2.id, 500)
+    print(f"✅ Comptes créés: {a1.id} (solde={a1.get_balance()}) / {a2.id} (solde={a2.get_balance()})")
+
+    # 3️⃣ Dépôt
+    bank.deposit(a1.id, 200)
+    print(f"💰 Nouveau solde de {a1.id}: {a1.get_balance()} MAD")
+
+    # 4️⃣ Retrait
+    bank.withdraw(a2.id, 100)
+    print(f"💸 Nouveau solde de {a2.id}: {a2.get_balance()} MAD")
+
+    # 5️⃣ Virement
+    bank.transfer(a1.id, a2.id, 300)
+    print(f"🔁 Virement de 300 MAD effectué de {a1.id} vers {a2.id}")
+
+    # 6️⃣ Intérêt automatique
+    bank.add_interest(a2.id, 2.5)
+    print(f"💹 Intérêts ajoutés au compte {a2.id} (solde final={a2.get_balance()} MAD)")
+
+    print("\n✅ Mode automatique terminé avec succès.")
+    print(f"📊 Solde final {a1.id}: {a1.get_balance()} MAD")
+    print(f"📊 Solde final {a2.id}: {a2.get_balance()} MAD")
 
 def main():
     bank = Banque("Banque Centrale")
@@ -48,7 +82,7 @@ def main():
                 a_from = input("Compte source ID: ").strip()
                 a_to = input("Compte destination ID: ").strip()
                 amount = float(input("Montant du virement: "))
-                t1, t2 = bank.transfer(a_from, a_to, amount)
+                bank.transfer(a_from, a_to, amount)
                 print(f"✅ Virement de {amount:.2f} MAD effectué de {a_from} vers {a_to}.")
 
             elif choice == "6":
@@ -64,15 +98,15 @@ def main():
                     print("Aucune transaction")
                 else:
                     for tr in hist:
-                        print(tr) 
+                        print(tr)
                 print("---------------------------------")
-            
-            elif choice == "8": 
+
+            elif choice == "8":
                 aid = input("ID compte: ").strip()
                 rate = float(input("Taux d'intérêt en % (ex: 2.5): ") or 2.5)
                 t = bank.add_interest(aid, rate)
                 print(f"✅ Intérêts ajoutés. Reçu:", t)
-                
+
             elif choice == "9":
                 print("Au revoir 👋")
                 break
@@ -85,6 +119,9 @@ def main():
 
 if __name__ == "__main__":
     try:
-        main()
+        if len(sys.argv) > 1 and sys.argv[1] == "--auto":
+            mode_automatique()
+        else:
+            main()
     except KeyboardInterrupt:
         print("\n👋 Programme arrêté par l'utilisateur.")
