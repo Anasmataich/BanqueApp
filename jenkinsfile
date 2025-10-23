@@ -2,35 +2,29 @@ pipeline {
     agent any   
     stages {
         stage('Checkout') {
-            
             steps {
                 git(
                     url: 'https://github.com/Anasmataich/BanqueApp.git',
-                    branch: 'feature-virement',
+                    branch: 'feature-virement'
                 )
-                
             }
         }
+
         stage('Run Tests') {
             steps {
-                echo ' Lancement des tests unitaires avec Pytest...'
+                echo 'Lancement des tests unitaires avec Pytest...'
                 bat '''
                 pytest -v > test_results.txt
                 type test_results.txt
+                pytest -v
                 '''
             }
         }
-        stage('run the app') {
+
+        stage('Run the App') {
             steps {
                 bat 'python main.py --auto'
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                bat 'pytest -v'
-            }
-        }
-
     }
- }
+}
