@@ -22,8 +22,6 @@ pipeline {
                 echo "Installation de pytest..."
                 pip install pytest
                 
-                REM Si vous avez un fichier requirements.txt, utilisez-le :
-                REM pip install -r requirements.txt
 
                 echo "Lancement des tests unitaires avec Pytest (sortie console)..."
                 
