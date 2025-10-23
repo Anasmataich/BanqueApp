@@ -72,7 +72,7 @@ class Banque:
         return acc.add_transaction("Ajout d'intérêts", interest)
 
     def afficher_clients(self):
-        print(f"🏦 Liste des clients de la banque {self.nom} :")
+        print(f" Liste des clients de la banque {self.nom} :")
         if not self.clients:
             print("Aucun client enregistré.")
             return
