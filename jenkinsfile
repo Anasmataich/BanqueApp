@@ -1,0 +1,22 @@
+pipeline {    
+    stages {
+        stage('Checkout') {
+            
+            steps {
+                git(
+                    url: 'https://github.com/Anasmataich/BanqueApp.git',
+                    branch: 'main',
+                    credentialsId: 'jenkins_github_token'
+                )
+                
+            }
+        }
+        stage('run the app') {
+            steps {
+                bat """
+                python main.py
+                """
+            }
+        }
+    }
+ }
