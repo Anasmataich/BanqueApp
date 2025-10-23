@@ -84,4 +84,7 @@ def main():
             print(f"❌ Erreur: {e}")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n👋 Programme arrêté par l'utilisateur.")
