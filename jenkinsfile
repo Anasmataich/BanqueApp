@@ -11,6 +11,15 @@ pipeline {
                 
             }
         }
+        stage('Run Tests') {
+            steps {
+                echo ' Lancement des tests unitaires avec Pytest...'
+                bat '''
+                pytest -v > test_results.txt
+                type test_results.txt
+                '''
+            }
+        }
         stage('run the app') {
             steps {
                 bat 'python main.py --auto'
